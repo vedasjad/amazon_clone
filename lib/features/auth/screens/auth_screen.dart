@@ -10,6 +10,11 @@ enum Auth {
   signup,
 }
 
+class Togglers {
+  static bool obscurePassword = true;
+  static bool keepSignedIn = true;
+}
+
 class AuthScreen extends StatefulWidget {
   static const String routeName = '/auth-screen';
   const AuthScreen({Key? key}) : super(key: key);
@@ -28,8 +33,6 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
 
-  static bool showPassword = false;
-  static bool keepSignedIn = true;
   @override
   void dispose() {
     super.dispose();
@@ -45,6 +48,16 @@ class _AuthScreenState extends State<AuthScreen> {
       email: _emailController.text,
       password: _passwordController.text,
       name: _nameController.text,
+    );
+  }
+
+  void signInUser() {
+    debugPrint("checkpoint 0");
+    authService.signInUser(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
+      keepSignedIn: Togglers.keepSignedIn,
     );
   }
 
@@ -128,6 +141,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomTextField(
+                            obscureText: false,
                             controller: _nameController,
                             hintText: "Name",
                           ),
@@ -135,6 +149,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             height: 10,
                           ),
                           CustomTextField(
+                            obscureText: false,
                             controller: _emailController,
                             hintText: "Email",
                           ),
@@ -142,6 +157,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             height: 10,
                           ),
                           CustomTextField(
+                            obscureText: Togglers.obscurePassword,
                             controller: _passwordController,
                             hintText: "Password",
                           ),
@@ -167,7 +183,15 @@ class _AuthScreenState extends State<AuthScreen> {
                           ),
                           Row(
                             children: [
-                              CustomCheckBox(value: showPassword),
+                              CustomCheckBox(
+                                value: !Togglers.obscurePassword,
+                                onChanged: (bool? val) {
+                                  setState(() {
+                                    Togglers.obscurePassword =
+                                        !Togglers.obscurePassword;
+                                  });
+                                },
+                              ),
                               const Text(
                                 'Show password',
                               ),
@@ -237,6 +261,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       child: Column(
                         children: [
                           CustomTextField(
+                            obscureText: false,
                             controller: _emailController,
                             hintText: "Email",
                           ),
@@ -244,6 +269,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             height: 5,
                           ),
                           CustomTextField(
+                            obscureText: Togglers.obscurePassword,
                             controller: _passwordController,
                             hintText: "Amazon Password",
                           ),
@@ -252,7 +278,15 @@ class _AuthScreenState extends State<AuthScreen> {
                           ),
                           Row(
                             children: [
-                              CustomCheckBox(value: showPassword),
+                              CustomCheckBox(
+                                value: !Togglers.obscurePassword,
+                                onChanged: (bool? val) {
+                                  setState(() {
+                                    Togglers.obscurePassword =
+                                        !Togglers.obscurePassword;
+                                  });
+                                },
+                              ),
                               const Text(
                                 'Show password',
                               ),
@@ -260,7 +294,15 @@ class _AuthScreenState extends State<AuthScreen> {
                           ),
                           Row(
                             children: [
-                              CustomCheckBox(value: keepSignedIn),
+                              CustomCheckBox(
+                                value: Togglers.keepSignedIn,
+                                onChanged: (bool? val) {
+                                  setState(() {
+                                    Togglers.keepSignedIn =
+                                        !Togglers.keepSignedIn;
+                                  });
+                                },
+                              ),
                               const Text(
                                 'Keep Me Signed In',
                               ),
@@ -270,8 +312,13 @@ class _AuthScreenState extends State<AuthScreen> {
                             height: 10,
                           ),
                           CustomButton(
-                            text: 'Sign Up',
-                            onTap: () {},
+                            text: 'Sign In',
+                            onTap: () {
+                              if (_signInFormKey.currentState!.validate()) {
+                                debugPrint('g');
+                                signInUser();
+                              }
+                            },
                           ),
                         ],
                       ),

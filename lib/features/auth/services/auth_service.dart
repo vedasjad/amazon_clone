@@ -1,9 +1,10 @@
+import 'dart:convert';
+
 import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/utils.dart';
 import 'package:amazon_clone/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-
 import '../../../constants/global_variables.dart';
 
 class AuthService {
@@ -48,6 +49,46 @@ class AuthService {
       debugPrint("Checkpoint 3");
     } catch (e) {
       debugPrint("Checkpoint 4");
+      debugPrint(e.toString());
+      showSnackBar(context, e.toString());
+    }
+  }
+
+  void signInUser({
+    required BuildContext context,
+    required String email,
+    required String password,
+    required bool keepSignedIn,
+  }) async {
+    try {
+      debugPrint("Checkpoint 1");
+      http.Response res = await http.post(
+        Uri.parse('$uri/api/signin'),
+        body: jsonEncode({
+          'email': email,
+          'password': password,
+        }),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+      debugPrint("Checkpoint 2");
+
+      debugPrint(res.body);
+
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            // showSnackBar(
+            //   context,
+            //   '',
+            // );
+          });
+      debugPrint("Checkpoint 3");
+    } catch (e) {
+      debugPrint("Checkpoint 4");
+      debugPrint(e.toString());
       showSnackBar(context, e.toString());
     }
   }

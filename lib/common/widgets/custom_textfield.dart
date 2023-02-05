@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
-  const CustomTextField(
-      {Key? key, required this.controller, required this.hintText})
+  bool obscureText;
+  CustomTextField(
+      {Key? key,
+      required this.controller,
+      required this.hintText,
+      required this.obscureText})
       : super(key: key);
 
   @override
@@ -15,6 +19,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: widget.obscureText,
       controller: widget.controller,
       decoration: InputDecoration(
         hintText: widget.hintText,
