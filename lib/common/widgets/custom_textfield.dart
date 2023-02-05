@@ -28,6 +28,21 @@ class _CustomTextFieldState extends State<CustomTextField> {
         )),
       ),
       validator: (val) {
+        if (val == null || val.isEmpty) {
+          return 'Enter your ${widget.hintText}';
+        } else if (widget.hintText == 'Email') {
+          if (!RegExp(r'^[A-Za-z0-9]+@([a-z]+(\.[a-z]+)+)').hasMatch(val)) {
+            return 'Enter Valid Email';
+          }
+        } else if (widget.hintText == 'Name') {
+          if (!RegExp(r'^[a-z A-Z]+$').hasMatch(val)) {
+            return 'Enter Valid Name';
+          }
+        } else {
+          if (val.length < 6) {
+            return 'Password must be atleast 6 characters!';
+          }
+        }
         return null;
       },
     );
