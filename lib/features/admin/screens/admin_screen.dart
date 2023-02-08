@@ -1,8 +1,6 @@
 import 'package:amazon_clone/features/admin/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../constants/global_variables.dart';
-import '../../../providers/user_provider.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({Key? key}) : super(key: key);
@@ -37,7 +35,6 @@ class _AdminScreenState extends State<AdminScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(Provider.of<UserProvider>(context).user.token);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),

@@ -46,7 +46,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           if (!RegExp(r'^[a-z A-Z]+$').hasMatch(val)) {
             return 'Enter Valid Name';
           }
-        } else {
+        } else if (widget.hintText == 'Password') {
           if (val.length < 6) {
             return 'Password must be atleast 6 characters!';
           }

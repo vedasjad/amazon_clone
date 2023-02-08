@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    debugPrint("Checkpoint 11");
+    debugPrint("Checkpoint 0");
     authService.getUserData(context: context);
   }
 
