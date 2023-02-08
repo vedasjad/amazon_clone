@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'common/widgets/bottom_bar.dart';
 import 'features/home/screens/home_screen.dart';
+import 'features/search/screens/search_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
@@ -29,15 +30,21 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         builder: (_) => CategoryDealsScreen(category: category),
       );
+    case SearchScreen.routeName:
+      var searchQuery = routeSettings.arguments as String;
+      return MaterialPageRoute(
+        builder: (_) => SearchScreen(searchQuery: searchQuery),
+      );
     default:
       return MaterialPageRoute(
-          settings: routeSettings,
-          builder: (_) => const Scaffold(
-                body: Center(
-                  child: Text(
-                    'Screen doesn\'t exist!',
-                  ),
-                ),
-              ));
+        settings: routeSettings,
+        builder: (_) => const Scaffold(
+          body: Center(
+            child: Text(
+              'Screen doesn\'t exist!',
+            ),
+          ),
+        ),
+      );
   }
 }
