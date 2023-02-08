@@ -1,7 +1,7 @@
 const express = require('express');
 const productRouter = express.Router();
-const auth = require('../middlewares/auth');
 const Product = require('../models/product');
+const admin = require('../middlewares/admin');
 
 productRouter.get("/api/products",admin,async(req,res)=>{
   try{
