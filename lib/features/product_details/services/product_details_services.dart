@@ -28,7 +28,6 @@ class ProductDetailsServices {
           'rating': rating,
         }),
       );
-
       httpErrorHandle(
         response: res,
         context: context,
