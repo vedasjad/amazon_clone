@@ -280,6 +280,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   product: widget.product,
                   rating: rating,
                 );
+                setState(() {});
               },
             )
           ],

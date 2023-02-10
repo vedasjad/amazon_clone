@@ -51,9 +51,9 @@ class Product {
       category: map['category'] ?? '',
       price: map['price']?.toDouble() ?? 0.0,
       id: map['_id'],
-      rating: map['ratings'] != null
+      rating: map['rating'] != null
           ? List<Rating>.from(
-              map['ratings']?.map(
+              map['rating']?.map(
                 (x) => Rating.fromMap(x),
               ),
             )
