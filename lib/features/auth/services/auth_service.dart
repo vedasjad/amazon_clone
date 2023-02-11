@@ -26,6 +26,7 @@ class AuthService {
         address: '',
         type: '',
         token: '',
+        cart: [],
       );
       debugPrint("Checkpoint 1");
 
