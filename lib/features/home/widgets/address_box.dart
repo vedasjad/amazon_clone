@@ -39,13 +39,12 @@ class AddressBox extends StatelessWidget {
               ),
             ),
           ),
+          Expanded(child: Container()),
           const Padding(
             padding: EdgeInsets.only(left: 5, top: 2),
-            child: Expanded(
-              child: Icon(
-                Icons.arrow_drop_down_outlined,
-                size: 22,
-              ),
+            child: Icon(
+              Icons.arrow_drop_down_outlined,
+              size: 22,
             ),
           ),
         ],

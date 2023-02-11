@@ -9,7 +9,7 @@ mongoose.set('strictQuery', true);
 userRouter.post('/api/add-to-cart',auth,async (req,res) => {
   try{
     const {id} = req.body;
-    const product = await Product.findOne({id});
+    const product = await Product.findById(id);
     let user = await User.findById(req.user);
     if(user.cart.length == 0){
       user.cart.push({product, quantity: 1});
