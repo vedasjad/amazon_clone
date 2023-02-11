@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/global_variables.dart';
 import '../../../providers/user_provider.dart';
+import '../../address/screens/address_screen.dart';
 import '../../search/screens/search_screen.dart';
 
 class CartScreen extends StatefulWidget {
@@ -22,6 +23,13 @@ class _CartScreenState extends State<CartScreen> {
       context,
       SearchScreen.routeName,
       arguments: query,
+    );
+  }
+
+  void navigateToAddress() {
+    Navigator.pushNamed(
+      context,
+      AddressScreen.routeName,
     );
   }
 
@@ -122,7 +130,7 @@ class _CartScreenState extends State<CartScreen> {
             const CartSubtotal(),
             CustomButton(
               text: 'Proceed to Buy(${user.cart.length} items)',
-              onTap: () {},
+              onTap: navigateToAddress,
               color: Colors.yellow[600],
             ),
             const SizedBox(

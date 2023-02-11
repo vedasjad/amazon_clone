@@ -5,6 +5,7 @@ import 'package:amazon_clone/features/product_details/screens/product_details_sc
 import 'package:flutter/material.dart';
 
 import 'common/widgets/bottom_bar.dart';
+import 'features/address/screens/address_screen.dart';
 import 'features/home/screens/home_screen.dart';
 import 'features/search/screens/search_screen.dart';
 import 'models/product.dart';
@@ -36,6 +37,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       var searchQuery = routeSettings.arguments as String;
       return MaterialPageRoute(
         builder: (_) => SearchScreen(searchQuery: searchQuery),
+      );
+    case AddressScreen.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const AddressScreen(),
       );
     case ProductDetailScreen.routeName:
       var product = routeSettings.arguments as Product;
