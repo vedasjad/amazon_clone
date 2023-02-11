@@ -110,7 +110,6 @@ class AuthService {
   }) async {
     try {
       debugPrint("Checkpoint 1");
-
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('x-auth-token');
       if (token == null) {
